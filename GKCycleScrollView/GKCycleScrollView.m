@@ -29,7 +29,7 @@
 // 当前显示的cell大小
 @property (nonatomic, assign) CGSize cellSize;
 
-@property (nonatomic, strong, readwrite) NSMutableArray *visibleCells;
+@property (nonatomic, strong) NSMutableArray *visibleCells;
 @property (nonatomic, strong) NSMutableArray *reusableCells;
 @property (nonatomic, assign) NSRange        visibleRange;
 
@@ -859,6 +859,23 @@
         _reusableCells = [NSMutableArray new];
     }
     return _reusableCells;
+}
+
+- (NSMutableArray<GKCycleScrollViewCell *> *)allCells {
+    NSMutableArray *arr = [NSMutableArray array];
+    for (id item in self.visibleCells) {
+        if ([item isKindOfClass:[GKCycleScrollViewCell class]]) {
+            [arr addObject:item];
+        }
+    }
+    
+    for (id item in self.reusableCells) {
+        if ([item isKindOfClass:[GKCycleScrollViewCell class]]) {
+            [arr addObject:item];
+        }
+    }
+    
+    return arr;
 }
 
 @end

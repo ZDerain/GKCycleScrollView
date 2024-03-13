@@ -105,8 +105,8 @@ typedef NS_ENUM(NSUInteger, GKCycleScrollViewScrollDirection) {
 // 自动滚动时间间隔，默认3s
 @property (nonatomic, assign) CGFloat autoScrollTime;
 
-// 可见的Cells
-@property (nonatomic, strong, readonly) NSMutableArray *visibleCells;
+// 所有创建的Cell
+@property (nonatomic, strong, readonly) NSMutableArray <GKCycleScrollViewCell *>*allCells;
 /**
  刷新数据，必须调用此方法
  */
