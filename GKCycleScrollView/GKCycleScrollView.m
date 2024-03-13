@@ -29,7 +29,7 @@
 // 当前显示的cell大小
 @property (nonatomic, assign) CGSize cellSize;
 
-@property (nonatomic, strong) NSMutableArray *visibleCells;
+@property (nonatomic, strong, readwrite) NSMutableArray *visibleCells;
 @property (nonatomic, strong) NSMutableArray *reusableCells;
 @property (nonatomic, assign) NSRange        visibleRange;
 
@@ -114,7 +114,7 @@
 }
 
 #pragma mark - Public Methods
-- (void)reloadData {
+- (void)reloadData:(void(^)(void))completion {
     // 移除所有cell
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -161,6 +161,7 @@
     __weak __typeof(self) weakSelf = self;
     [self refreshSizeCompletion:^{
         [weakSelf initialScrollViewAndCellSize];
+        completion();
     }];
 }
 
