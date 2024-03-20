@@ -60,7 +60,10 @@
     
     if (CGSizeEqualToSize(self.originSize, CGSizeZero)) return;
     
-    [self updateScrollViewAndCellSize];
+    if (!CGSizeEqualToSize(self.bounds.size, self.originSize)) {
+        [self updateScrollViewAndCellSize];
+    }
+    // [self updateScrollViewAndCellSize];
 }
 
 // 解决当父视图释放时，当前视图因为NSTimer强引用而导致的不能释放
